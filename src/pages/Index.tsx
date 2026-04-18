@@ -10,12 +10,14 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { CursorFollower } from "@/components/CursorFollower";
 import { PageLoader } from "@/components/PageLoader";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const Index = () => {
   const [loaded, setLoaded] = useState(false);
 
   return (
     <>
+      <SmoothScroll />
       <PageLoader onDone={() => setLoaded(true)} />
       <CursorFollower />
       <main className="relative bg-background min-h-screen overflow-x-hidden">
