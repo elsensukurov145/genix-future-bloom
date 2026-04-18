@@ -119,13 +119,6 @@ export const Hero = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
-            <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs text-muted-foreground">
-              <span
-                className={`h-1.5 w-1.5 rounded-full bg-primary ${on ? "animate-pulse" : ""}`}
-              />
-              WAY tərəfindən təqdim olunur
-            </div>
-
             {/* Letter-by-letter heading */}
             <h1 className="display-font text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]">
               {letters.map((ch, i) => (
