@@ -45,7 +45,7 @@ export const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} GeniX by WAY · Bakı, Azərbaycan</div>
+          <div>© 2025 GeniX · Bakı, Azərbaycan</div>
           <div className="flex gap-6">
             <a href="#" className="hover:text-foreground transition-colors">Məxfilik</a>
             <a href="#" className="hover:text-foreground transition-colors">Şərtlər</a>
