@@ -1,16 +1,21 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Send, CheckCircle2, Mail } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { Send, CheckCircle2, Mail, Loader2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+
+const EMAILJS_SERVICE_ID = "service_m9x4g39";
+const EMAILJS_TEMPLATE_ID = "template_1tz5ima";
+const EMAILJS_PUBLIC_KEY = "8Ah88Hkucs4TC9RGX";
+const RECIPIENT_EMAIL = "shukurovelshan388@gmail.com";
 
 export const Apply = () => {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes("@")) return;
-
+  const fireConfetti = () => {
     const end = Date.now() + 800;
     const colors = ["#1D9E75", "#378ADD", "#ffb648", "#ffffff"];
     (function frame() {
@@ -36,7 +41,39 @@ export const Apply = () => {
       origin: { y: 0.6 },
       colors,
     });
-    setDone(true);
+  };
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@") || loading) return;
+
+    setLoading(true);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_email: email,
+          to_email: RECIPIENT_EMAIL,
+          message: `Yeni GeniX müraciəti: ${email}`,
+          from_page: "GeniX Landing — Apply",
+          submitted_at: new Date().toLocaleString("az-AZ"),
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+
+      fireConfetti();
+      setDone(true);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      toast({
+        title: "Göndərilmədi",
+        description: "Müraciətin göndərilməsində xəta baş verdi. Bir az sonra yenidən cəhd et.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,15 +120,26 @@ export const Apply = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="sən@example.com"
-                      className="w-full glass rounded-full pl-11 pr-4 py-3.5 text-sm bg-white/5 focus:outline-none focus:ring-2 focus:ring-primary/60 placeholder:text-muted-foreground/60"
+                      disabled={loading}
+                      className="w-full glass rounded-full pl-11 pr-4 py-3.5 text-sm bg-white/5 focus:outline-none focus:ring-2 focus:ring-primary/60 placeholder:text-muted-foreground/60 disabled:opacity-60"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-glow transition-all glow-primary"
+                    disabled={loading}
+                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-glow transition-all glow-primary disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    Müraciət et
-                    <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    {loading ? (
+                      <>
+                        Göndərilir
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Müraciət et
+                        <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      </>
+                    )}
                   </button>
                 </form>
               ) : (
