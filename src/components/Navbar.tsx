@@ -42,12 +42,6 @@ export const Navbar = () => {
             </a>
           ))}
         </nav>
-        <a
-          href="#apply"
-          className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium glass hover:bg-primary/20 hover:border-primary/40 transition-all"
-        >
-          Müraciət et
-        </a>
       </div>
     </motion.header>
   );
