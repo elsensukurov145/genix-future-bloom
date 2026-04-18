@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* Core dark palette */
-    --background: 240 20% 4%;            /* #0a0a0f */
-    --background-elev: 240 18% 7%;
+    --background: 240 25% 3%;            /* #06060a */
+    --background-elev: 240 20% 6%;
     --foreground: 0 0% 98%;
 
     --card: 240 18% 6%;
