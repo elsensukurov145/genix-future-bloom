@@ -4,7 +4,8 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 
 const LampScene = lazy(() => import("./three/LampScene"));
 
-const HEADING = "Gələcəyin liderləri\nburadan başlayır";
+const HEADING_1 = "Gələcəyin liderləri";
+const HEADING_2 = "buradan başlayır";
 
 export const Hero = () => {
   const [on, setOn] = useState(false);
@@ -16,9 +17,6 @@ export const Hero = () => {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
-  // Split heading once for letter-by-letter
-  const letters = HEADING.split("");
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden noise">
@@ -67,12 +65,10 @@ export const Hero = () => {
               <LampScene on={on} onToggle={() => setOn((v) => !v)} />
             </Suspense>
           ) : (
-            // Mobile static fallback — tap to toggle
             <div
               className="relative w-full h-full flex items-center justify-center cursor-pointer"
               onClick={() => setOn((v) => !v)}
             >
-              {/* hanging cord */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-1/2 bg-gradient-to-b from-white/20 to-white/5" />
               <div
                 className={`relative h-56 w-56 rounded-full transition-all duration-700 ${
@@ -88,7 +84,6 @@ export const Hero = () => {
                   strokeWidth="0.8"
                 />
                 <circle cx="50" cy="58" r="4" fill={on ? "#fff1c0" : "#222"} />
-                {/* pull cord */}
                 <line x1="58" y1="50" x2="58" y2="78" stroke={on ? "#c98a3a" : "#444"} strokeWidth="0.8" />
                 <circle cx="58" cy="80" r="2.5" fill={on ? "#c98a3a" : "#5a3a1f"} />
               </svg>
@@ -119,28 +114,52 @@ export const Hero = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
-            {/* Letter-by-letter heading */}
+            {/* Letter-by-letter heading — two clean lines */}
             <h1 className="display-font text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]">
-              {letters.map((ch, i) => (
-                <motion.span
-                  key={i}
-                  initial={false}
-                  animate={{
-                    opacity: on ? 1 : 0.35,
-                    y: on ? 0 : 4,
-                    filter: on ? "blur(0px)" : "blur(2px)",
-                  }}
-                  transition={{
-                    delay: on ? i * 0.025 : 0,
-                    duration: 0.5,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="inline-block"
-                  style={{ whiteSpace: ch === " " ? "pre" : "normal" }}
-                >
-                  {ch}
-                </motion.span>
-              ))}
+              <div>
+                {HEADING_1.split("").map((ch, i) => (
+                  <motion.span
+                    key={"h1-" + i}
+                    initial={false}
+                    animate={{
+                      opacity: on ? 1 : 0.35,
+                      y: on ? 0 : 4,
+                      filter: on ? "blur(0px)" : "blur(2px)",
+                    }}
+                    transition={{
+                      delay: on ? i * 0.025 : 0,
+                      duration: 0.5,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="inline-block"
+                    style={{ whiteSpace: ch === " " ? "pre" : "normal" }}
+                  >
+                    {ch}
+                  </motion.span>
+                ))}
+              </div>
+              <div>
+                {HEADING_2.split("").map((ch, i) => (
+                  <motion.span
+                    key={"h2-" + i}
+                    initial={false}
+                    animate={{
+                      opacity: on ? 1 : 0.35,
+                      y: on ? 0 : 4,
+                      filter: on ? "blur(0px)" : "blur(2px)",
+                    }}
+                    transition={{
+                      delay: on ? (HEADING_1.length + i) * 0.025 : 0,
+                      duration: 0.5,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="inline-block"
+                    style={{ whiteSpace: ch === " " ? "pre" : "normal" }}
+                  >
+                    {ch}
+                  </motion.span>
+                ))}
+              </div>
             </h1>
 
             <motion.p
