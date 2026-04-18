@@ -4,7 +4,7 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 
 const LampScene = lazy(() => import("./three/LampScene"));
 
-const HEADING = "Gələcəyin liderləri <br/> buradan başlayır";
+const HEADING = "Gələcəyin liderləri\nburadan başlayır";
 
 export const Hero = () => {
   const [on, setOn] = useState(false);
