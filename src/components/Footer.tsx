@@ -20,8 +20,6 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3 text-lg">
             <GeniXLogo />
-            <span className="text-muted-foreground text-sm">·</span>
-            <span className="text-muted-foreground text-sm font-medium tracking-wider">WAY</span>
           </div>
 
           <div className="flex items-center gap-2">
