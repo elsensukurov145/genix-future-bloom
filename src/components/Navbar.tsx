@@ -8,6 +8,7 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { t } = useI18n();
+  
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
