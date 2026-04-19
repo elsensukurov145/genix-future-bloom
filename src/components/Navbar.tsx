@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { GeniXLogo } from "./GeniXLogo";
 import { LangSwitcher } from "./LangSwitcher";
 import { useI18n } from "@/lib/i18n";
 
@@ -44,7 +43,7 @@ export const Navbar = () => {
     >
       <div className="container flex items-center justify-between gap-3">
         <a href="#" className="text-base sm:text-lg shrink-0" onClick={() => setOpen(false)}>
-          <GeniXLogo />
+          <span className="text-xl font-bold text-white">GeniX</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-7 lg:gap-8">
