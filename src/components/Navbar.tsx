@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { GeniXLogo } from "./GeniXLogo"; // Orijinal loqo geri gəldi
 import { LangSwitcher } from "./LangSwitcher";
 import { useI18n } from "@/lib/i18n";
 
@@ -8,7 +9,6 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { t } = useI18n();
-  
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -44,7 +44,7 @@ export const Navbar = () => {
     >
       <div className="container flex items-center justify-between gap-3">
         <a href="#" className="text-base sm:text-lg shrink-0" onClick={() => setOpen(false)}>
-          <span className="text-xl font-bold text-white">GeniX</span>
+          <GeniXLogo /> {/* Loqo animasiyası bərpa olundu */}
         </a>
 
         <nav className="hidden md:flex items-center gap-7 lg:gap-8">
