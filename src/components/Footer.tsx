@@ -1,10 +1,11 @@
 import { Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { GeniXLogo } from "./GeniXLogo";
+import { useI18n } from "@/lib/i18n";
 
 export const Footer = () => {
+  const { t } = useI18n();
   return (
     <footer className="relative pt-12 pb-10 overflow-hidden">
-      {/* Animated gradient line */}
       <div className="absolute top-0 inset-x-0 h-px overflow-hidden">
         <div
           className="h-full w-[200%] animate-gradient-x"
@@ -43,11 +44,11 @@ export const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-          <div>© 2025 GeniX · Bakı, Azərbaycan</div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">Məxfilik</a>
-            <a href="#" className="hover:text-foreground transition-colors">Şərtlər</a>
-            <a href="#apply" className="hover:text-foreground transition-colors">Əlaqə</a>
+          <div>{t("footer_copy")}</div>
+          <div className="flex flex-wrap justify-center gap-6">
+            <a href="#" className="hover:text-foreground transition-colors">{t("footer_privacy")}</a>
+            <a href="#" className="hover:text-foreground transition-colors">{t("footer_terms")}</a>
+            <a href="#apply" className="hover:text-foreground transition-colors">{t("footer_contact")}</a>
           </div>
         </div>
       </div>
